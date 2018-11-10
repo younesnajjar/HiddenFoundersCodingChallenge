@@ -1,0 +1,8 @@
+
+usquid:S1450"WRemove the "cardView" field and declare it as a local variable in the relevant methods.(õ¤öÑ8ÌÊûİï,
+nsquid:CommentedOutCodeLine1"<This block of commented-out lines of code should be removed.(ÓóÅºûÿÿÿÿ8Ö—èİï,
+nsquid:CommentedOutCodeLine>"<This block of commented-out lines of code should be removed.(ÕŸ…Ùşÿÿÿÿ8Ö—èİï,
+[squid:UselessImportCheck"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8Ş§÷İï,
+5squid:S2176."Rename this class.(Â×Öúÿÿÿÿ8Ö—èİï,
+€squid:S1488!"bImmediately return this expression instead of assigning it to the temporary variable "viewHolder".(õ¬Ãö8Ö—èİï,
+jsquid:UselessImportCheck	":Remove this unused import 'android.widget.RelativeLayout'.(ü¯ğõşÿÿÿÿ8™Öìİï,

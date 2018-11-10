@@ -105,6 +105,5 @@ public class MainActivity extends AppCompatActivity implements ScrollListener {
             bottomNavigation.hideBottomNavigation(true);
         }
         fragmentseen = true;
-        Log.e("test tag", "onScrollChange: scrolled" );
     }
 }

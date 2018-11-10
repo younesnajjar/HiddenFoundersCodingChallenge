@@ -56,7 +56,7 @@ public class TrendsAdapter  extends RecyclerView.Adapter<TrendsAdapter.ViewHolde
             // to access the context from any ViewHolder instance.
 
             super(itemView);
-            mTextView = itemView.findViewById(R.id.textviewx);
+            mTextView = itemView.findViewById(R.id.repo_name);
 
 
             //offerImageView = itemView.findViewById(R.id.offre);

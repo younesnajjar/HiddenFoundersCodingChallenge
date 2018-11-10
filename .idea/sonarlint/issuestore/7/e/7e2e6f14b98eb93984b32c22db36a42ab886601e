@@ -1,0 +1,11 @@
+
+nsquid:CommentedOutCodeLine4"<This block of commented-out lines of code should be removed.(Ëïžãúÿÿÿÿ8©†€âï,
+zsquid:S1450"WRemove the "mAdapter" field and declare it as a local variable in the relevant methods.(î×îúÿÿÿÿ8±ÔÆÝï,
+isquid:CommentedOutCodeLine/"<This block of commented-out lines of code should be removed.(è»ËÉ8©†€âï,
+¤squid:S1186 "€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÆÍ…µûÿÿÿÿ8±ÔÆÝï,
+Ksquid:S11859"(Remove this method to simply inherit it.(öûöºÿÿÿÿÿ8Æ£…âï,
+nsquid:CommentedOutCodeLine1"<This block of commented-out lines of code should be removed.(È²Îõÿÿÿÿÿ8©†€âï,
+zsquid:S1450"\Remove the "mNestedScroll" field and declare it as a local variable in the relevant methods.(Êµ†œ8çïàï,
+€squid:S1450"]Remove the "mLayoutManager" field and declare it as a local variable in the relevant methods.(Ø„îÛøÿÿÿÿ8›Ô—Ùï,
+Osquid:S1068"1Remove this unused "mNestedScroll" private field.(Êµ†œ8·•“áï,
+squid:S1450"cRemove the "trendingRecyclerView" field and declare it as a local variable in the relevant methods.(Ô¶ëÌ8ÿžÿØï,
