@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">HiddenFoundersCodingChallenge</string>
+    <string name="trending_framgement">Trending</string>
+    <string name="settings_fragment">Settings</string>
+</resources>
