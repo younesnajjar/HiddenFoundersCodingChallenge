@@ -11,29 +11,37 @@
         android:layout_margin="20dp"
         >
         <TextView
+            android:textSize="20dp"
+            android:textColor="@color/lightblack"
             android:id="@+id/repo_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:text="Test"/>
         <TextView
+            android:textColor="@color/lightblack"
             android:id="@+id/repo_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:text="Test"/>
         <RelativeLayout
-
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageButton
+            <ImageView
                 android:id="@+id/avatar_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_action_image"/>
+                android:src="@drawable/ic_action_image"
+                android:layout_centerVertical="true"/>
             <TextView
+                android:textColor="@color/lightblack"
                 android:id="@+id/owner_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="test"
+                android:layout_margin="5dp"
                 android:layout_toRightOf="@id/avatar_icon"
                 android:layout_centerVertical="true"/>
             <ImageView
@@ -42,8 +50,10 @@
                 android:src="@drawable/ic_action_star"
                 android:layout_toLeftOf="@id/stars_count"
                 android:layout_centerVertical="true"
-                android:tint="#000000"/>
+                android:padding="5dp"
+                android:tint="@color/colorAccent"/>
             <TextView
+                android:textColor="@color/lightblack"
                 android:id="@+id/stars_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
