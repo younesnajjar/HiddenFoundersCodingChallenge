@@ -55,8 +55,8 @@ public class RetrofitManager {
         return getRetrofit(AppConstants.URL_ENDPOINT_PRIMARY).create(GitHubEndPoints.class);
     }
 
-    public Call<GitHubTredingsCallBack> getRepositoriesInfos(String date, Callback<GitHubTredingsCallBack> callback){
-        Call<GitHubTredingsCallBack> call = getAPIService().getUserInfo(date);
+    public Call<GitHubTredingsCallBack> getRepositoriesInfos(String date,int page, Callback<GitHubTredingsCallBack> callback){
+        Call<GitHubTredingsCallBack> call = getAPIService().getUserInfo(date,page);
         call.enqueue(callback);
         return call;
     }

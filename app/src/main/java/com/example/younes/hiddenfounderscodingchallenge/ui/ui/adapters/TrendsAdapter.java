@@ -1,18 +1,19 @@
 package com.example.younes.hiddenfounderscodingchallenge.ui.ui.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.younes.hiddenfounderscodingchallenge.R;
 import com.example.younes.hiddenfounderscodingchallenge.ui.models.Item;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,37 +23,62 @@ import butterknife.ButterKnife;
  * Created by younes on 11/10/2018.
  */
 
-public class TrendsAdapter  extends RecyclerView.Adapter<TrendsAdapter.ViewHolder> {
+public class TrendsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private static final int ITEM = 1;
+    private static final int LOADING = 0;
     List<Item> mItems;
-    Context mContext;
-    private View cardView;
-    public TrendsAdapter(List<Item> items){
-        this.mItems = items;
+    private boolean isLoadingAdded = false;
+    public TrendsAdapter(){
+        this.mItems = new ArrayList<>();
     }
     @Override
-    public TrendsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        cardView = inflater.inflate(R.layout.trends_item
-                , parent, false);
-        ViewHolder viewHolder = new ViewHolder(cardView);
+        RecyclerView.ViewHolder viewHolder = null;
+        switch (viewType) {
+            case ITEM:
+                viewHolder = getViewHolder(parent, inflater);
+                break;
+            case LOADING:
+                View v2 = inflater.inflate(R.layout.item_progress, parent, false);
+                viewHolder = new LoadingVH(v2);
+                break;
+        }
+        return viewHolder;
+    }
+    @NonNull
+    private RecyclerView.ViewHolder getViewHolder(ViewGroup parent, LayoutInflater inflater) {
+        RecyclerView.ViewHolder viewHolder;
+        View v1 = inflater.inflate(R.layout.trends_item, parent, false);
+        viewHolder = new TrendsViewHolder(v1);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(TrendsAdapter.ViewHolder holder, int position) {
-        holder.fillData(mItems.get(position));
-    }
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        switch(getItemViewType(position)){
+            case ITEM:
+                TrendsViewHolder vh = (TrendsViewHolder) holder;
+                vh.fillData(mItems.get(position));
+                break;
+            case LOADING:
+                // Nothing to do ! :)
+                break;
+        }
 
+    }
+    @Override
+    public int getItemViewType(int position) {
+        return (position == mItems.size() - 1 && isLoadingAdded) ? 0 : 1;
+    }
     @Override
     public int getItemCount() {
         return mItems.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        // Your holder should contain a member variable
-        // for any view that will be set as you render a row
-//        ImageView offreView;
+    public class TrendsViewHolder extends RecyclerView.ViewHolder {
+
         @BindView(R.id.repo_name)
         TextView repoName;
         @BindView(R.id.repo_description)
@@ -64,27 +90,84 @@ public class TrendsAdapter  extends RecyclerView.Adapter<TrendsAdapter.ViewHolde
         @BindView(R.id.stars_count)
         TextView repoStarsCount;
 
-        // We also create a constructor that accepts the entire item row
-        // and does the view lookups to find each subview
-        public ViewHolder(View itemView) {
-            // Stores the itemView in a public final member variable that can be used
-            // to access the context from any ViewHolder instance.
+        public TrendsViewHolder(View itemView) {
 
             super(itemView);
             ButterKnife.bind(this,itemView);
 
-
-            //offerImageView = itemView.findViewById(R.id.offre);
         }
         public void fillData(Item item){
+            if(item.getId() == null) return;
             repoName.setText(item.getName());
             repoDescription.setText(item.getDescription());
             repoOwnerName.setText(item.getOwner().getLogin());
-            Picasso.get().load(item.getOwner().getAvatarUrl()).resize(100,100).into(repoOwnerAvatar);
+            Picasso.get().load(item.getOwner().getAvatarUrl()).resize(100,100).error(R.drawable.ic_action_image).into(repoOwnerAvatar);
             repoStarsCount.setText(item.getStargazersCount().toString());
-
         }
 
     }
+
+    protected class LoadingVH extends RecyclerView.ViewHolder {
+
+        public LoadingVH(View itemView) {
+            super(itemView);
+        }
+    }
+
+    /*
+    * All the functions below are used for pagination -----------------------------------------------
+     */
+    public void add(Item item) {
+        mItems.add(item);
+        notifyItemInserted(mItems.size() - 1);
+    }
+
+    public void addAll(List<Item> items) {
+        for (Item mc : items) {
+            add(mc);
+        }
+    }
+
+    public void remove(Item item) {
+        int position = mItems.indexOf(item);
+        if (position > -1) {
+            mItems.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    public void clear() {
+        isLoadingAdded = false;
+        while (getItemCount() > 0) {
+            remove(getItem(0));
+        }
+    }
+
+    public boolean isEmpty() {
+        return getItemCount() == 0;
+    }
+
+    public void addLoadingFooter() {
+        isLoadingAdded = true;
+        add(new Item());
+    }
+
+    public void removeLoadingFooter() {
+        isLoadingAdded = false;
+
+        int position = mItems.size() - 1;
+        Item item = getItem(position);
+
+        if (item != null) {
+            mItems.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    public Item getItem(int position) {
+        return mItems.get(position);
+    }
+
+
 
 }

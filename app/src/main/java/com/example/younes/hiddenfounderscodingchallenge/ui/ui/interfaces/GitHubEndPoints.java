@@ -13,5 +13,5 @@ import retrofit2.http.Query;
 
 public interface GitHubEndPoints {
     @GET("repositories?sort=stars&order=desc")
-    Call<GitHubTredingsCallBack> getUserInfo(@Query("q") String date);
+    Call<GitHubTredingsCallBack> getUserInfo(@Query("q") String date,@Query("page") int page);
 }

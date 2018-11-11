@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.ui.activities.MainActivity">
-
     <FrameLayout
         android:id="@+id/main_fragment_container"
         android:layout_width="match_parent"
