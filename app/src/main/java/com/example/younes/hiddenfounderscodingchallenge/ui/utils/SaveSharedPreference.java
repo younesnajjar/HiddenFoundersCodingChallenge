@@ -15,7 +15,6 @@ public class SaveSharedPreference {
     static SharedPreferences getPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
-    // Values for Shared Prefrences
 
     /**
      * Set the Login Status
