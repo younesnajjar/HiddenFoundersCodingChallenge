@@ -25,8 +25,8 @@ import butterknife.ButterKnife;
 
 public class TrendsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final int ITEM = 1;
     private static final int LOADING = 0;
+    private static final int ITEM = 1;
     List<Item> mItems;
     private boolean isLoadingAdded = false;
     public TrendsAdapter(){
@@ -58,16 +58,10 @@ public class TrendsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        switch(getItemViewType(position)){
-            case ITEM:
-                TrendsViewHolder vh = (TrendsViewHolder) holder;
-                vh.fillData(mItems.get(position));
-                break;
-            case LOADING:
-                // Nothing to do ! :)
-                break;
-        }
-
+        if(getItemViewType(position) == ITEM){
+            TrendsViewHolder vh = (TrendsViewHolder) holder;
+            vh.fillData(mItems.get(position));
+        }else{/*    Do Nothing :)     */}
     }
     @Override
     public int getItemViewType(int position) {
@@ -101,7 +95,7 @@ public class TrendsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
             repoName.setText(item.getName());
             repoDescription.setText(item.getDescription());
             repoOwnerName.setText(item.getOwner().getLogin());
-            Picasso.get().load(item.getOwner().getAvatarUrl()).resize(100,100).error(R.drawable.ic_action_image).into(repoOwnerAvatar);
+            Picasso.get().load(item.getOwner().getAvatarUrl()).error(R.drawable.ic_action_image).into(repoOwnerAvatar);
             repoStarsCount.setText(item.getStargazersCount().toString());
         }
 
@@ -115,7 +109,7 @@ public class TrendsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     /*
-    * All the functions below are used for pagination -----------------------------------------------
+    * All the functions below are used for pagination --------------------------------------------
      */
     public void add(Item item) {
         mItems.add(item);
@@ -143,31 +137,12 @@ public class TrendsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    public boolean isEmpty() {
-        return getItemCount() == 0;
-    }
-
     public void addLoadingFooter() {
         isLoadingAdded = true;
         add(new Item());
     }
 
-    public void removeLoadingFooter() {
-        isLoadingAdded = false;
-
-        int position = mItems.size() - 1;
-        Item item = getItem(position);
-
-        if (item != null) {
-            mItems.remove(position);
-            notifyItemRemoved(position);
-        }
-    }
-
     public Item getItem(int position) {
         return mItems.get(position);
     }
-
-
-
 }

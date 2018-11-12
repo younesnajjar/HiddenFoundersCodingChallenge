@@ -1,35 +1,27 @@
 package com.example.younes.hiddenfounderscodingchallenge.ui.ui.activities;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.example.younes.hiddenfounderscodingchallenge.R;
 import com.example.younes.hiddenfounderscodingchallenge.ui.ui.fragments.SettingsFragment;
 import com.example.younes.hiddenfounderscodingchallenge.ui.ui.fragments.TrendingFragment;
-import com.example.younes.hiddenfounderscodingchallenge.ui.ui.listners.ScrollListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements ScrollListener {
-
-
-    @BindView(R.id.bottom_navigation)
-    AHBottomNavigation bottomNavigation;
+public class MainActivity extends AppCompatActivity {
 
     SettingsFragment mSettingsFragment;
     TrendingFragment mTrendingFragment;
 
-
-    private boolean fragmentseen = true;
-
+    @BindView(R.id.bottom_navigation)
+    AHBottomNavigation bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +32,9 @@ public class MainActivity extends AppCompatActivity implements ScrollListener {
         initBottomNavigation();
         initFragments(getApplicationContext());
         initListeners();
-        loadFragment(mTrendingFragment, "home");
+
+        // Loading the Trending Fragment
+        loadFragment(mTrendingFragment, "Trending");
 
     }
     private void initBottomNavigation() {
@@ -57,9 +51,6 @@ public class MainActivity extends AppCompatActivity implements ScrollListener {
         bottomNavigation.setBehaviorTranslationEnabled(true);
         bottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
         bottomNavigation.setAccentColor(ContextCompat.getColor(this, R.color.colorAccent));
-        bottomNavigation.setInactiveColor(Color.parseColor("#000000"));
-        bottomNavigation.setItemDisableColor(Color.parseColor("#FFFFFF"));
-        bottomNavigation.disableItemAtPosition(2);
 
     }
     private boolean loadFragment(Fragment fragment, String tag) {
@@ -77,17 +68,11 @@ public class MainActivity extends AppCompatActivity implements ScrollListener {
         bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
-                fragmentseen = false;
-                switch (position) {
-                    case 0:
-                        loadFragment(mTrendingFragment,"home");
-                        break;
-                    case 1:
-                        loadFragment(mSettingsFragment,"cards");
-                        break;
-                    default:
-                        loadFragment(mTrendingFragment,"home");
-                }
+                if(position == 0)
+                    loadFragment(mTrendingFragment,"Trending");
+                else
+                    loadFragment(mSettingsFragment,"Settings");
+
                 return true;
             }
         });
@@ -95,15 +80,5 @@ public class MainActivity extends AppCompatActivity implements ScrollListener {
     private void initFragments(Context context){
         mTrendingFragment = new TrendingFragment();
         mSettingsFragment = new SettingsFragment();
-    }
-
-    @Override
-    public void onScrollChange(int dx, int dy) {
-        if (dy < 1) {
-            bottomNavigation.restoreBottomNavigation(true);
-        } else {
-            bottomNavigation.hideBottomNavigation(true);
-        }
-        fragmentseen = true;
     }
 }
