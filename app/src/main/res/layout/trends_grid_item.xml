@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:id="@+id/list_item"
+        android:background="@drawable/border"
+        android:padding="5dp"
+        >
+        <TextView
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:textSize="15dp"
+            android:textColor="@color/lightblack"
+            android:id="@+id/repo_name"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeMaxTextSize="100sp"
+            app:autoSizeStepGranularity="2sp"
+            android:text="Test"/>
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/avatar_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_action_image"
+            android:layout_centerVertical="true"/>
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/star_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_star"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:tint="@color/colorAccent"/>
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/lightblack"
+                android:id="@+id/stars_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test"
+                android:layout_centerVertical="true"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

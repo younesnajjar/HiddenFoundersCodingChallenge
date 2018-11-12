@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,6 +21,8 @@ import com.example.younes.hiddenfounderscodingchallenge.ui.models.Item;
 import com.example.younes.hiddenfounderscodingchallenge.ui.ui.adapters.TrendsAdapter;
 import com.example.younes.hiddenfounderscodingchallenge.ui.ui.api.RetrofitManager;
 import com.example.younes.hiddenfounderscodingchallenge.ui.ui.listners.CustomOnScrollListener;
+import com.example.younes.hiddenfounderscodingchallenge.ui.utils.AppConstants;
+import com.example.younes.hiddenfounderscodingchallenge.ui.utils.SaveSharedPreference;
 import com.example.younes.hiddenfounderscodingchallenge.ui.utils.ToastMessages;
 
 import java.text.SimpleDateFormat;
@@ -65,13 +68,13 @@ public class TrendingFragment extends Fragment {
 
         //if the fragment hasn't been loaded Before
         if(!isLoaded){
-            mAdapter = new TrendsAdapter(); //Create an empty Adapter
+            mAdapter = new TrendsAdapter(getContext()); //Create an empty Adapter
             loadFirstPage();
             progressBar.setVisibility(View.VISIBLE);
         }
 
         //Setting the Layout Manager
-        mLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false);
+        mLayoutManager = getLayoutManager();
         trendingRecyclerView.setLayoutManager(mLayoutManager);
 
         //Setting the RecyclerView Animator
@@ -164,5 +167,18 @@ public class TrendingFragment extends Fragment {
         mAdapter.clear();
         mAdapter.addAll(items);
         mAdapter.addLoadingFooter();
+    }
+    private LinearLayoutManager getLayoutManager(){
+        int viewType = SaveSharedPreference.getViewMode(getContext());
+        switch(viewType){
+            case AppConstants.VERTICAL_LINEAR_VIEW:
+                return new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+            case AppConstants.GRID_TWO_ELEMENT_ROW_VIEW:
+                return new GridLayoutManager(getContext(),2);
+            case AppConstants.GRID_THREE_ELEMENT_ROW_VIEW:
+                return new GridLayoutManager(getContext(),3);
+            default:
+                return new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        }
     }
 }
