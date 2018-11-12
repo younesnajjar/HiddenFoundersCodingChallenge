@@ -37,7 +37,7 @@ You can select which theme by clicking the settings button.</br>
 
 <img src="https://github.com/younesnajjar/HiddenFoundersCodingChallenge/blob/master/Help/ProjectScreenShots/Settings.png" width="300"></br>
 
-*Note*: the app remembers your last selected theme(the prefered them) so that when you reopen the app it will show the list in you prefered them.
+*Note*: the app remembers your last selected theme(the preferred them) so that when you reopen the app it will show the list in you preferred theme.
 
 ## Choice of libraries explaination
 
